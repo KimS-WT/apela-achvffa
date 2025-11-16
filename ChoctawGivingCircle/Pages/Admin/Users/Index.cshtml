@@ -1,0 +1,45 @@
+@page
+@model ChoctawGivingCircle.Pages.Admin.Users.IndexModel
+@{
+    ViewData["Title"] = "User Management";
+}
+
+<div class="container py-4">
+    <h1 class="h3 mb-4">Community Accounts</h1>
+    <div class="alert alert-info">
+        Only admins can view this page. Use it to keep track of supporters, requesters, and staff roles.
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-striped align-middle">
+            <thead>
+                <tr>
+                    <th>Email</th>
+                    <th>Display Name</th>
+                    <th>Roles</th>
+                    <th>Tribal Member</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var user in Model.Users)
+                {
+                    <tr>
+                        <td>@user.Email</td>
+                        <td>@(string.IsNullOrWhiteSpace(user.DisplayName) ? "—" : user.DisplayName)</td>
+                        <td>@user.Roles</td>
+                        <td>
+                            @if (user.IsTribalMember)
+                            {
+                                <span class="badge text-bg-success">Yes</span>
+                            }
+                            else
+                            {
+                                <span class="badge text-bg-secondary">No</span>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

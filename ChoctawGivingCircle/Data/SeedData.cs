@@ -20,6 +20,7 @@ public static class SeedData
 
         await EnsureRolesAsync(scopedProvider.GetRequiredService<RoleManager<IdentityRole>>());
         var adminUser = await EnsureAdminAsync(scopedProvider.GetRequiredService<UserManager<ApplicationUser>>());
+        await SeedTribesAsync(dbContext);
         await SeedSampleRequestsAsync(dbContext, adminUser.Id);
     }
 
@@ -50,6 +51,8 @@ public static class SeedData
             IsTribalMember = true
         };
 
+        adminUser.DisplayName = "Demo Admin";
+
         var result = await userManager.CreateAsync(adminUser, AdminPassword);
         if (!result.Succeeded)
         {
@@ -58,6 +61,24 @@ public static class SeedData
 
         await userManager.AddToRoleAsync(adminUser, "Admin");
         return adminUser;
+    }
+
+    private static async Task SeedTribesAsync(ApplicationDbContext dbContext)
+    {
+        if (await dbContext.Tribes.AnyAsync())
+        {
+            return;
+        }
+
+        var tribes = new List<Tribe>
+        {
+            new() { Name = "Choctaw Nation of Oklahoma", Abbreviation = "CNO" },
+            new() { Name = "Mississippi Band of Choctaw Indians", Abbreviation = "MBCI" },
+            new() { Name = "Jena Band of Choctaw Indians", Abbreviation = "JBCI" }
+        };
+
+        await dbContext.Tribes.AddRangeAsync(tribes);
+        await dbContext.SaveChangesAsync();
     }
 
     private static async Task SeedSampleRequestsAsync(ApplicationDbContext dbContext, string userId)
