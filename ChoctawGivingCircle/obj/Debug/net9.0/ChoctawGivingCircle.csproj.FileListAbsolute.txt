@@ -118,7 +118,6 @@ C:\Users\kimsu\StudyHall\VSCodeAIProjects\ChoctawGivingCircle-Achvffa\ChoctawGiv
 C:\Users\kimsu\StudyHall\VSCodeAIProjects\ChoctawGivingCircle-Achvffa\ChoctawGivingCircle\obj\Debug\net9.0\scopedcss\Pages\Shared\_Layout.cshtml.rz.scp.css
 C:\Users\kimsu\StudyHall\VSCodeAIProjects\ChoctawGivingCircle-Achvffa\ChoctawGivingCircle\obj\Debug\net9.0\scopedcss\bundle\ChoctawGivingCircle.styles.css
 C:\Users\kimsu\StudyHall\VSCodeAIProjects\ChoctawGivingCircle-Achvffa\ChoctawGivingCircle\obj\Debug\net9.0\scopedcss\projectbundle\ChoctawGivingCircle.bundle.scp.css
-C:\Users\kimsu\StudyHall\VSCodeAIProjects\ChoctawGivingCircle-Achvffa\ChoctawGivingCircle\obj\Debug\net9.0\compressed\6kwbpbxe8y-b9sayid5wm.gz
 C:\Users\kimsu\StudyHall\VSCodeAIProjects\ChoctawGivingCircle-Achvffa\ChoctawGivingCircle\obj\Debug\net9.0\compressed\t554k2ax6n-61n19gt1b8.gz
 C:\Users\kimsu\StudyHall\VSCodeAIProjects\ChoctawGivingCircle-Achvffa\ChoctawGivingCircle\obj\Debug\net9.0\compressed\yuya2uz9vd-xtxxf3hu2r.gz
 C:\Users\kimsu\StudyHall\VSCodeAIProjects\ChoctawGivingCircle-Achvffa\ChoctawGivingCircle\obj\Debug\net9.0\compressed\pzj6dnv926-bqjiyaj88i.gz
@@ -254,3 +253,4 @@ C:\Users\kimsu\StudyHall\VSCodeAIProjects\ChoctawGivingCircle-Achvffa\ChoctawGiv
 C:\Users\kimsu\StudyHall\VSCodeAIProjects\ChoctawGivingCircle-Achvffa\ChoctawGivingCircle\obj\Debug\net9.0\compressed\b9lhb08218-5pze98is44.gz
 C:\Users\kimsu\StudyHall\VSCodeAIProjects\ChoctawGivingCircle-Achvffa\ChoctawGivingCircle\obj\Debug\net9.0\compressed\yfc7ypekbg-mlv21k5csn.gz
 C:\Users\kimsu\StudyHall\VSCodeAIProjects\ChoctawGivingCircle-Achvffa\ChoctawGivingCircle\obj\Debug\net9.0\ChoctawGivingCircle.sourcelink.json
+C:\Users\kimsu\StudyHall\VSCodeAIProjects\ChoctawGivingCircle-Achvffa\ChoctawGivingCircle\obj\Debug\net9.0\compressed\6kwbpbxe8y-tbvvq62rh4.gz

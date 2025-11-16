@@ -1,10 +1,52 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Dashboard";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="row g-4">
+    <div class="col-lg-8">
+        <div class="card choctaw-card mb-4">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <span>Community Requests</span>
+                <a class="btn btn-choctaw btn-sm" asp-page="/Requests/Create">Create New</a>
+            </div>
+            <div class="card-body">
+                <div class="list-group list-group-flush">
+                    @foreach (var request in Model.SampleRequests)
+                    {
+                        <div class="list-group-item py-3">
+                            <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+                                <div>
+                                    <h5 class="mb-1">@request.Title</h5>
+                                    <small class="text-muted">Category: @request.Category · Created @request.CreatedOn.ToString("MMM dd")</small>
+                                </div>
+                                <span class="badge text-bg-secondary">@request.Status</span>
+                            </div>
+                            <div class="mt-3 d-flex flex-wrap gap-2">
+                                <a class="btn btn-choctaw-outline btn-sm" asp-page="/Requests/Details" asp-route-id="1">Details</a>
+                                <a class="btn btn-choctaw-outline btn-sm" asp-page="/Requests/Edit" asp-route-id="1">Edit</a>
+                                <a class="btn btn-choctaw-outline btn-sm" asp-page="/Requests/Delete" asp-route-id="1">Delete</a>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        @foreach (var card in Model.SidebarCards)
+        {
+            <div class="card choctaw-card mb-4">
+                <div class="card-header">@card.Title</div>
+                <div class="card-body">
+                    @if (card.Title.Contains("Stories"))
+                    {
+                        <div class="spiral-icon" aria-hidden="true"></div>
+                    }
+                    <p class="mb-0">@card.Body</p>
+                </div>
+            </div>
+        }
+    </div>
 </div>

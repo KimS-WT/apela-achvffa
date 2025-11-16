@@ -1,5 +1,17 @@
+:root {
+  /* Choctaw palette variables for easy future tweaks */
+  --choctaw-bg: #120805;
+  --choctaw-panel: #1f120d;
+  --choctaw-gold: #f3b343;
+  --choctaw-yellow: #f5d276;
+  --choctaw-red: #b33f2e;
+  --choctaw-orange: #d8782a;
+  --choctaw-text: #fef4e6;
+}
+
 html {
   font-size: 14px;
+  min-height: 100%;
 }
 
 @media (min-width: 768px) {
@@ -8,24 +20,161 @@ html {
   }
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
-}
-
 body {
-  margin-bottom: 60px;
+  margin: 0;
+  min-height: 100vh;
+  background-color: var(--choctaw-bg);
+  color: var(--choctaw-text);
+  font-family: "Inter", "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
-.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
-  color: var(--bs-secondary-color);
-  text-align: end;
+/* Choctaw sun emblem in navbar */
+.choctaw-sun {
+  width: 48px;
+  height: 48px;
+  background: radial-gradient(circle at center, var(--choctaw-yellow), var(--choctaw-gold));
+  border-radius: 50%;
+  position: relative;
+  margin-right: 0.75rem;
+  flex-shrink: 0;
+  box-shadow: 0 0 15px rgba(243, 179, 67, 0.5);
 }
 
-.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
-  text-align: start;
+.choctaw-sun::after {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 2px dashed rgba(243, 179, 67, 0.6);
+}
+
+/* Navbar background and link overrides */
+.navbar {
+  background: linear-gradient(90deg, rgba(17, 7, 5, 0.9), rgba(54, 30, 20, 0.95));
+  border-bottom: 4px solid var(--choctaw-gold);
+}
+
+.navbar .nav-link,
+.navbar .navbar-brand {
+  color: var(--choctaw-text) !important;
+  font-weight: 600;
+}
+
+.navbar .nav-link:hover {
+  color: var(--choctaw-yellow) !important;
+}
+
+/* Diamondback border along top of page */
+.diamond-border-top {
+  height: 10px;
+  background-image: repeating-linear-gradient(
+      90deg,
+      var(--choctaw-gold) 0,
+      var(--choctaw-gold) 20px,
+      transparent 20px,
+      transparent 40px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent 0,
+      transparent 20px,
+      var(--choctaw-red) 20px,
+      var(--choctaw-red) 40px
+    );
+  background-size: 100% 5px, 100% 10px;
+  background-position: 0 0, 0 5px;
+}
+
+.choctaw-shell {
+  padding-top: 2rem;
+  padding-bottom: 3rem;
+}
+
+/* Choctaw-inspired cards with diamond pattern headers */
+.choctaw-card {
+  background-color: var(--choctaw-panel);
+  border: 1px solid rgba(243, 179, 67, 0.3);
+  border-radius: 1rem;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.5);
+}
+
+.choctaw-card .card-header {
+  border-bottom: none;
+  color: var(--choctaw-yellow);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  position: relative;
+  background-color: transparent;
+}
+
+.choctaw-card .card-header::after {
+  /* Choctaw diamondback pattern using CSS gradient */
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -6px;
+  height: 6px;
+  background-image: repeating-linear-gradient(
+    90deg,
+    var(--choctaw-red) 0,
+    var(--choctaw-red) 15px,
+    var(--choctaw-orange) 15px,
+    var(--choctaw-orange) 30px
+  );
+}
+
+.choctaw-card .card-body {
+  color: var(--choctaw-text);
+}
+
+.btn-choctaw {
+  background-image: linear-gradient(120deg, var(--choctaw-gold), var(--choctaw-orange));
+  color: #1a0c08;
+  border: none;
+  font-weight: 600;
+}
+
+.btn-choctaw:hover {
+  color: #1a0c08;
+  opacity: 0.9;
+}
+
+.btn-choctaw-outline {
+  border: 1px solid var(--choctaw-gold);
+  color: var(--choctaw-gold);
+}
+
+.btn-choctaw-outline:hover {
+  background-color: rgba(243, 179, 67, 0.15);
+  color: var(--choctaw-yellow);
+}
+
+.list-group-item {
+  background-color: transparent;
+  color: var(--choctaw-text);
+  border-color: rgba(243, 179, 67, 0.2);
+}
+
+.pattern-footer {
+  background-color: #080302;
+  border-top: 3px solid var(--choctaw-red);
+}
+
+.spiral-icon {
+  /* Subtle spiral icon mimicking Choctaw motifs */
+  width: 60px;
+  height: 60px;
+  border: 3px solid var(--choctaw-orange);
+  border-radius: 50%;
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.spiral-icon::after {
+  content: "";
+  position: absolute;
+  inset: 12px;
+  border: 3px solid var(--choctaw-gold);
+  border-radius: 50%;
 }
