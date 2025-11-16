@@ -1,0 +1,54 @@
+@page
+@model ChoctawGivingCircle.Pages.Requests.MyModel
+@{
+    ViewData["Title"] = "My Assistance Requests";
+}
+
+<div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <div>
+            <h1 class="h3 mb-0">My Requests</h1>
+            <p class="text-muted mb-0">Track everything you've shared with the community.</p>
+        </div>
+        <a class="btn btn-primary" asp-page="/Requests/Create">Create Request</a>
+    </div>
+
+    @if (Model.Requests.Count == 0)
+    {
+        <div class="alert alert-info">
+            You have not submitted any requests yet. Use the button above to share a need.
+        </div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table table-striped align-middle">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Category</th>
+                        <th>Priority</th>
+                        <th>Estimated Cost</th>
+                        <th>Status</th>
+                        <th>Updated</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var request in Model.Requests)
+                    {
+                        <tr>
+                            <td>@request.Title</td>
+                            <td>@request.Category</td>
+                            <td>
+                                <span class="badge text-bg-secondary">@request.Priority</span>
+                            </td>
+                            <td>@request.EstimatedCost.ToString("C")</td>
+                            <td>@request.Status</td>
+                            <td>@request.UpdatedAt.ToLocalTime().ToString("g")</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>
