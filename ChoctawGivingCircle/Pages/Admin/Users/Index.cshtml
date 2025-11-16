@@ -18,6 +18,7 @@
                     <th>Display Name</th>
                     <th>Roles</th>
                     <th>Tribal Member</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -36,6 +37,10 @@
                             {
                                 <span class="badge text-bg-secondary">No</span>
                             }
+                        </td>
+                        <td class="text-end">
+                            <a class="btn btn-sm btn-outline-secondary" asp-page="/Admin/Users/Edit" asp-route-id="@user.Id">Edit</a>
+                            <a class="btn btn-sm btn-danger" asp-page="/Admin/Users/Delete" asp-route-id="@user.Id">Delete</a>
                         </td>
                     </tr>
                 }

@@ -253,3 +253,4 @@ C:\Users\kimsu\StudyHall\VSCodeAIProjects\ChoctawGivingCircle-Achvffa\ChoctawGiv
 C:\Users\kimsu\StudyHall\VSCodeAIProjects\ChoctawGivingCircle-Achvffa\ChoctawGivingCircle\obj\Debug\net9.0\compressed\t0qo7o574p-dd6z7egasc.gz
 C:\Users\kimsu\StudyHall\VSCodeAIProjects\ChoctawGivingCircle-Achvffa\ChoctawGivingCircle\obj\Debug\net9.0\compressed\b9lhb08218-5pze98is44.gz
 C:\Users\kimsu\StudyHall\VSCodeAIProjects\ChoctawGivingCircle-Achvffa\ChoctawGivingCircle\obj\Debug\net9.0\compressed\yfc7ypekbg-mlv21k5csn.gz
+C:\Users\kimsu\StudyHall\VSCodeAIProjects\ChoctawGivingCircle-Achvffa\ChoctawGivingCircle\obj\Debug\net9.0\ChoctawGivingCircle.sourcelink.json

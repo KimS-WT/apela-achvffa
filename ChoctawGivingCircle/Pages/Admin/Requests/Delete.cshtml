@@ -1,0 +1,18 @@
+@page "{id:int}"
+@model ChoctawGivingCircle.Pages.Admin.Requests.DeleteModel
+@{
+    ViewData["Title"] = "Delete Request";
+}
+
+<div class="container py-4">
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h1 class="h4 text-danger">Delete Assistance Request</h1>
+            <p>Are you sure you want to remove <strong>@Model.RequestItem?.Title</strong>? This action cannot be undone.</p>
+            <form method="post" class="d-flex gap-2">
+                <a asp-page="/Admin/Requests/Index" class="btn btn-secondary">Cancel</a>
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+        </div>
+    </div>
+</div>

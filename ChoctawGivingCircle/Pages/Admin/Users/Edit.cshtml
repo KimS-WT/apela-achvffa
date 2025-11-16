@@ -1,0 +1,67 @@
+@page "{id}"
+@model ChoctawGivingCircle.Pages.Admin.Users.EditModel
+@{
+    ViewData["Title"] = "Edit User";
+}
+
+<div class="container py-4">
+    <a asp-page="/Admin/Users/Index" class="btn btn-link px-0 mb-3">← Back to Users</a>
+
+    <form method="post" class="card shadow-sm">
+        <div class="card-body">
+            <h1 class="h4 mb-3">Edit User</h1>
+            <input asp-for="Input.Id" type="hidden" />
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+            <div class="mb-3">
+                <label asp-for="Input.DisplayName" class="form-label"></label>
+                <input asp-for="Input.DisplayName" class="form-control" />
+                <span asp-validation-for="Input.DisplayName" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Input.Email" class="form-label"></label>
+                <input asp-for="Input.Email" class="form-control" disabled />
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Input.PhoneNumber" class="form-label"></label>
+                <input asp-for="Input.PhoneNumber" class="form-control" />
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Input.Bio" class="form-label"></label>
+                <textarea asp-for="Input.Bio" class="form-control" rows="4"></textarea>
+            </div>
+
+            <div class="form-check mb-3">
+                <input asp-for="Input.IsTribalMember" class="form-check-input" />
+                <label asp-for="Input.IsTribalMember" class="form-check-label"></label>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Roles</label>
+                <div class="d-flex flex-wrap gap-3">
+                    @foreach (var role in Model.AllRoles)
+                    {
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="Input.Roles"
+                                   value="@role"
+                                   @(Model.Input.Roles.Contains(role) ? "checked" : "") />
+                            <label class="form-check-label">@role</label>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="card-footer d-flex justify-content-end gap-2">
+            <a asp-page="/Admin/Users/Index" class="btn btn-link">Cancel</a>
+            <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+    </form>
+</div>
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}

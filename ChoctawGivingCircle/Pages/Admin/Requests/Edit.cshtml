@@ -1,0 +1,71 @@
+@page "{id:int}"
+@model ChoctawGivingCircle.Pages.Admin.Requests.EditModel
+@{
+    ViewData["Title"] = "Edit Request";
+}
+
+<div class="container py-4">
+    <a asp-page="/Admin/Requests/Index" class="btn btn-link px-0 mb-3">← Back to Requests</a>
+
+    <form method="post" class="card shadow-sm">
+        <div class="card-body">
+            <h1 class="h4 mb-3">Edit Assistance Request</h1>
+            <input asp-for="Input.Id" type="hidden" />
+            <input asp-for="Input.UserId" type="hidden" />
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+            <div class="mb-3">
+                <label asp-for="Input.Title" class="form-label"></label>
+                <input asp-for="Input.Title" class="form-control" />
+                <span asp-validation-for="Input.Title" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Input.Description" class="form-label"></label>
+                <textarea asp-for="Input.Description" class="form-control" rows="4"></textarea>
+                <span asp-validation-for="Input.Description" class="text-danger"></span>
+            </div>
+
+            <div class="row g-3">
+                <div class="col-md-4">
+                    <label asp-for="Input.Category" class="form-label"></label>
+                    <select asp-for="Input.Category" class="form-select"
+                            asp-items="Html.GetEnumSelectList<ChoctawGivingCircle.Models.AssistanceCategory>()">
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="Input.Priority" class="form-label"></label>
+                    <select asp-for="Input.Priority" class="form-select"
+                            asp-items="Html.GetEnumSelectList<ChoctawGivingCircle.Models.AssistancePriority>()">
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="Input.Status" class="form-label"></label>
+                    <select asp-for="Input.Status" class="form-select"
+                            asp-items="Html.GetEnumSelectList<ChoctawGivingCircle.Models.AssistanceStatus>()">
+                    </select>
+                </div>
+            </div>
+
+            <div class="row g-3 mt-1">
+                <div class="col-md-6">
+                    <label asp-for="Input.EstimatedCost" class="form-label"></label>
+                    <input asp-for="Input.EstimatedCost" class="form-control" />
+                </div>
+                <div class="col-md-6">
+                    <label asp-for="Input.NeededByDate" class="form-label"></label>
+                    <input asp-for="Input.NeededByDate" class="form-control" />
+                </div>
+            </div>
+        </div>
+        <div class="card-footer d-flex justify-content-end gap-2">
+            <a asp-page="/Admin/Requests/Index" class="btn btn-link">Cancel</a>
+            <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+    </form>
+</div>
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}

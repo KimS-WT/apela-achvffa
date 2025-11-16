@@ -1,0 +1,18 @@
+@page "{id}"
+@model ChoctawGivingCircle.Pages.Admin.Users.DeleteModel
+@{
+    ViewData["Title"] = "Delete User";
+}
+
+<div class="container py-4">
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h1 class="h4 text-danger">Delete User</h1>
+            <p>Are you sure you want to delete <strong>@Model.TargetUser?.Email</strong>? This will remove their requests and sign-in access.</p>
+            <form method="post" class="d-flex gap-2">
+                <a asp-page="/Admin/Users/Index" class="btn btn-secondary">Cancel</a>
+                <button class="btn btn-danger" type="submit">Delete</button>
+            </form>
+        </div>
+    </div>
+</div>
