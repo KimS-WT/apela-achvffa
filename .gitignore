@@ -1,0 +1,29 @@
+# Build outputs
+bin/
+obj/
+
+# User-specific files
+.vs/
+*.user
+*.suo
+
+# Logs
+*.log
+
+# Dotnet / NuGet artifacts
+packages/
+*.nupkg
+.nuget/
+
+# Tooling
+.vscode/
+*.ide/
+.idea/
+
+# SQLite database
+*.db
+*.db-journal
+
+# Other
+*.swp
+*.DS_Store

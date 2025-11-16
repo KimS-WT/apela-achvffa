@@ -25,10 +25,9 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
 
     private void UpdateTimestamps()
     {
-        var entries = ChangeTracker.Entries<AssistanceRequest>();
         var utcNow = DateTime.UtcNow;
 
-        foreach (var entry in entries)
+        foreach (var entry in ChangeTracker.Entries<AssistanceRequest>())
         {
             if (entry.State == EntityState.Added)
             {
@@ -38,6 +37,14 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
             if (entry.State == EntityState.Modified || entry.State == EntityState.Added)
             {
                 entry.Entity.UpdatedAt = utcNow;
+            }
+        }
+
+        foreach (var entry in ChangeTracker.Entries<Contribution>())
+        {
+            if (entry.State == EntityState.Added && entry.Entity.CreatedAt == default)
+            {
+                entry.Entity.CreatedAt = utcNow;
             }
         }
     }

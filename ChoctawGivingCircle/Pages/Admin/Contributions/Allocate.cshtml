@@ -1,0 +1,38 @@
+@page "{id:int}"
+@model ChoctawGivingCircle.Pages.Admin.Contributions.AllocateModel
+@{
+    ViewData["Title"] = "Allocate Contribution";
+}
+
+<div class="container py-4">
+    <a asp-page="/Admin/Contributions/Index" class="btn btn-link px-0 mb-3">← Back to Contributions</a>
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h1 class="h4">Allocate General Fund Contribution</h1>
+            <p class="text-muted">Assign this donation to a specific request to advance fulfillment.</p>
+
+            @if (Model.Contribution is not null)
+            {
+                <dl class="row">
+                    <dt class="col-sm-3">Amount</dt>
+                    <dd class="col-sm-9 fw-semibold">@Model.Contribution.Amount.ToString("C")</dd>
+
+                    <dt class="col-sm-3">Type</dt>
+                    <dd class="col-sm-9">@Model.Contribution.ContributionType</dd>
+
+                    <dt class="col-sm-3">Notes</dt>
+                    <dd class="col-sm-9">@(!string.IsNullOrWhiteSpace(Model.Contribution.Notes) ? Model.Contribution.Notes : "—")</dd>
+                </dl>
+            }
+
+            <form method="post">
+                <div class="mb-3">
+                    <label class="form-label" asp-for="SelectedRequestId">Assign to Request</label>
+                    <select class="form-select" asp-for="SelectedRequestId" asp-items="Model.RequestOptions"></select>
+                </div>
+                <button class="btn btn-primary" type="submit">Allocate Donation</button>
+            </form>
+        </div>
+    </div>
+</div>

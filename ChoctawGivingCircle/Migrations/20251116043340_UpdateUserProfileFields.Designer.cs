@@ -3,6 +3,7 @@ using System;
 using ChoctawGivingCircle.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ChoctawGivingCircle.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251116043340_UpdateUserProfileFields")]
+    partial class UpdateUserProfileFields
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.6");
@@ -150,12 +153,11 @@ namespace ChoctawGivingCircle.Migrations
                     b.Property<decimal>("Amount")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("AssistanceRequestId")
+                    b.Property<int>("AssistanceRequestId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("ContributionType")
                         .IsRequired()
-                        .HasMaxLength(120)
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("CreatedAt")
@@ -164,18 +166,9 @@ namespace ChoctawGivingCircle.Migrations
                     b.Property<string>("DonorUserId")
                         .HasColumnType("TEXT");
 
-                    b.Property<bool>("IsGeneralFund")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Notes")
-                        .HasMaxLength(500)
-                        .HasColumnType("TEXT");
-
                     b.HasKey("Id");
 
                     b.HasIndex("AssistanceRequestId");
-
-                    b.HasIndex("DonorUserId");
 
                     b.ToTable("Contributions");
                 });
@@ -331,15 +324,11 @@ namespace ChoctawGivingCircle.Migrations
                 {
                     b.HasOne("ChoctawGivingCircle.Models.AssistanceRequest", "AssistanceRequest")
                         .WithMany()
-                        .HasForeignKey("AssistanceRequestId");
-
-                    b.HasOne("ChoctawGivingCircle.Data.ApplicationUser", "DonorUser")
-                        .WithMany()
-                        .HasForeignKey("DonorUserId");
+                        .HasForeignKey("AssistanceRequestId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("AssistanceRequest");
-
-                    b.Navigation("DonorUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

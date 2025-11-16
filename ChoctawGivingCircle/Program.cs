@@ -18,6 +18,7 @@ builder.Services
     .AddDefaultTokenProviders();
 
 builder.Services.AddScoped<IAssistanceRequestService, AssistanceRequestService>();
+builder.Services.AddScoped<IContributionService, ContributionService>();
 
 // Add services to the container.
 builder.Services.AddRazorPages();
