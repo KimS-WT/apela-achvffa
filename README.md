@@ -10,10 +10,10 @@ A demo ASP.NET Core 9.0 Razor Pages application implementing a small mutual-aid 
 
 ## Screenshots
 <p align="center">
-  <img src="assets/screenshots/home.png" alt="Admin Home" width="260">
-  <img src="assets/screenshots/admin-all-donations.png" alt="All Donations" width="260">
-  <img src="assets/screenshots/pending-fund-approvals.png" alt="Pending Fund Approvals" width="260">
-  <img src="assets/screenshots/admin-approved-requests.png" alt="Admin Approved Requests" width="260">
+  <img src="docs/screenshots/home.png" alt="Admin Home" width="260">
+  <img src="docs/screenshots/admin-all-donations.png" alt="All Donations" width="260">
+  <img src="docs/screenshots/pending-fund-approvals.png" alt="Pending Fund Approvals" width="260">
+  <img src="docs/screenshots/admin-approved-requests.png" alt="Admin Approved Requests" width="260">
 </p>
 
 ## Project layout
