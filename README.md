@@ -9,12 +9,13 @@ A demo ASP.NET Core 9.0 Razor Pages application implementing a small mutual-aid 
 - Fake email delivery is used for demos and writes to an `EmailLogs` table for audit and verification.
 
 ## Screenshots
-<p align="center">
-  <img src="docs/screenshots/home.png" alt="Admin Home" width="260">
-  <img src="docs/screenshots/admin-all-donations.png" alt="All Donations" width="260">
-  <img src="docs/screenshots/pending-fund-approvals.png" alt="Pending Fund Approvals" width="260">
-  <img src="docs/screenshots/admin-approved-requests.png" alt="Admin Approved Requests" width="260">
-</p>
+<div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;">
+  <img src="docs/screenshots/home.png" alt="Admin Home" style="width: 300px; height: auto;">
+  <img src="docs/screenshots/admin-all-donations.png" alt="All Donations" style="width: 300px; height: auto;"><br>
+  <img src="docs/screenshots/pending-fund-approvals.png" alt="Pending Fund Approvals" style="width: 300px; height: auto;">
+  <img src="docs/screenshots/admin-approved-requests.png" alt="Admin Approved Requests" style="width: 300px; height: auto;">
+</div>
+
 
 ## Project layout
 - `ChoctawGivingCircle/`  main web app and Razor Pages.
