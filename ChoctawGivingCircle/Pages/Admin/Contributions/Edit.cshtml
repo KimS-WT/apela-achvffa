@@ -1,0 +1,43 @@
+@page
+@model ChoctawGivingCircle.Pages.Admin.Contributions.EditModel
+@{
+    ViewData["Title"] = "Edit Contribution";
+}
+
+<h2>Edit Contribution</h2>
+
+<form method="post" class="row g-3">
+    <input type="hidden" asp-for="Input.Id" />
+
+    <div class="col-md-4">
+        <label asp-for="Input.Amount" class="form-label">Amount</label>
+        <input asp-for="Input.Amount" class="form-control" />
+    </div>
+
+    <div class="col-md-4">
+        <label asp-for="Input.ContributionType" class="form-label">Type</label>
+        <input asp-for="Input.ContributionType" class="form-control" />
+    </div>
+
+    <div class="col-md-4">
+        <label asp-for="Input.IsGeneralFund" class="form-label">General Fund</label>
+        <input asp-for="Input.IsGeneralFund" class="form-check-input" />
+    </div>
+
+    <div class="col-12">
+        <label asp-for="Input.AssistanceRequestId" class="form-label">Assign to Request</label>
+        <select asp-for="Input.AssistanceRequestId" class="form-select" asp-items="Model.RequestOptions">
+            <option value="">-- leave unassigned / general fund --</option>
+        </select>
+    </div>
+
+    <div class="col-12">
+        <label asp-for="Input.Notes" class="form-label">Notes</label>
+        <textarea asp-for="Input.Notes" class="form-control"></textarea>
+    </div>
+
+    <div class="col-12">
+        <button type="submit" class="btn btn-choctaw">Save</button>
+        <button type="submit" formaction="?handler=Delete" formmethod="post" class="btn btn-outline-danger ms-2">Delete</button>
+    </div>
+</form>

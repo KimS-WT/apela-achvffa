@@ -11,9 +11,11 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm mb-0">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">ChoctawGivingCircle</a>
+                @* Choctaw-inspired sun emblem in the header *@
+                <div class="choctaw-sun" aria-hidden="true"></div>
+                <a class="navbar-brand" asp-area="" asp-page="/Index">Choctaw Planner</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -21,34 +23,46 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
+                            <a class="nav-link" asp-area="" asp-page="/Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Requests/Index">Community Requests</a>
+                            <a class="nav-link" asp-area="" asp-page="/Requests/Index">Community Requests</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Requests/My">My Requests</a>
+                            <a class="nav-link" asp-area="" asp-page="/Requests/My">My Requests</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Requests/Create">Share a Request</a>
+                            <a class="nav-link" asp-area="" asp-page="/Requests/Create">Share a Request</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-page="/Contributions/Create">Donate</a>
                         </li>
                         @if (User.Identity?.IsAuthenticated ?? false)
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-page="/Profile/Index">My Profile</a>
+                                <a class="nav-link" asp-area="" asp-page="/Profile/Index">My Profile</a>
                             </li>
                         }
                         @if (User.IsInRole("Admin"))
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-page="/Admin/Users/Index">Manage Users</a>
+                                <a class="nav-link" asp-area="" asp-page="/Admin/Users/Index">Manage Users</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-page="/Admin/Contributions/Index">Manage Contributions</a>
+                                <a class="nav-link" asp-area="" asp-page="/Admin/Requests/Index">All Requests</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-page="/Admin/Contributions/Index">Manage Contributions</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-page="/Admin/Contributions/Approvals">Pending Approvals</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-page="/Admin/Contributions/DropOffs">Drop-Offs</a>
                             </li>
                         }
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
+                            <a class="nav-link" asp-area="" asp-page="/Privacy">Privacy</a>
                         </li>
                     </ul>
                     <partial name="_LoginPartial" />
@@ -56,15 +70,18 @@
             </div>
         </nav>
     </header>
-    <div class="container">
+    @* Diamondback border strip honoring Choctaw motifs *@
+    <div class="diamond-border-top"></div>
+    <div class="container choctaw-shell">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2025 - ChoctawGivingCircle - <a asp-area="" asp-page="/Privacy">Privacy</a>
+    <footer class="pattern-footer text-muted mt-5 py-3">
+        <div class="container d-flex justify-content-between">
+            <span>&copy; 2025 - ChoctawGivingCircle</span>
+            <a class="text-white" asp-area="" asp-page="/Privacy">Privacy</a>
         </div>
     </footer>
 

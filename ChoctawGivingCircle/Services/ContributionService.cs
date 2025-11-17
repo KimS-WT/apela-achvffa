@@ -53,4 +53,58 @@ public class ContributionService(ApplicationDbContext dbContext) : IContribution
 
         return fundContributions.Sum();
     }
+
+    public async Task CreateAsync(Contribution contribution)
+    {
+        await dbContext.Contributions.AddAsync(contribution);
+        await dbContext.SaveChangesAsync();
+    }
+
+    public async Task UpdateAsync(Contribution contribution)
+    {
+        dbContext.Contributions.Update(contribution);
+        await dbContext.SaveChangesAsync();
+    }
+
+    public async Task DeleteAsync(int id)
+    {
+        var entity = await dbContext.Contributions.FindAsync(id);
+        if (entity == null)
+        {
+            return;
+        }
+
+        dbContext.Contributions.Remove(entity);
+        await dbContext.SaveChangesAsync();
+    }
+
+    public async Task<List<Contribution>> GetByDonorAsync(string donorUserId)
+    {
+        return await dbContext.Contributions
+            .Where(c => c.DonorUserId == donorUserId)
+            .Include(c => c.AssistanceRequest)
+            .OrderByDescending(c => c.CreatedAt)
+            .ToListAsync();
+    }
+
+    public async Task<List<Contribution>> GetAnonymousAsync()
+    {
+        return await dbContext.Contributions
+            .Where(c => c.DonorUserId == null)
+            .Include(c => c.AssistanceRequest)
+            .OrderByDescending(c => c.CreatedAt)
+            .ToListAsync();
+    }
+
+    public async Task<List<Contribution>> GetByLocationAsync(int locationId)
+    {
+        return await dbContext.Contributions
+            .Include(c => c.AssistanceRequest)
+            .Include(c => c.DonorUser)
+            .Where(c => c.Id == (dbContext.DonationDropOffs
+                .Where(d => d.LocationId == locationId)
+                .Select(d => d.ContributionId)
+                .FirstOrDefault()))
+            .ToListAsync();
+    }
 }

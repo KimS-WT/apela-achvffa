@@ -13,6 +13,11 @@
         <a class="btn btn-primary" asp-page="/Requests/Create">Create Request</a>
     </div>
 
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+    }
+
     @if (Model.Requests.Count == 0)
     {
         <div class="alert alert-info">

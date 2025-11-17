@@ -57,4 +57,34 @@ public class AssistanceRequestService(ApplicationDbContext dbContext) : IAssista
         dbContext.AssistanceRequests.Remove(entity);
         await dbContext.SaveChangesAsync();
     }
+
+    /// <summary>
+    /// Validates if a status transition is allowed.
+    /// Allowed workflow: Draft → Submitted → UnderReview → Approved/Open → FullyFunded → Fulfilled/Closed
+    /// Admins can move between Open, Approved, FullyFunded, Fulfilled, and Closed at any time.
+    /// </summary>
+    public bool IsValidStatusTransition(AssistanceStatus currentStatus, AssistanceStatus newStatus)
+    {
+        // Cannot transition to same status
+        if (currentStatus == newStatus)
+            return false;
+
+        // Allowed transitions from each status
+        var allowedTransitions = new Dictionary<AssistanceStatus, HashSet<AssistanceStatus>>
+        {
+            { AssistanceStatus.Draft, new HashSet<AssistanceStatus> { AssistanceStatus.Submitted } },
+            { AssistanceStatus.Submitted, new HashSet<AssistanceStatus> { AssistanceStatus.UnderReview } },
+            { AssistanceStatus.UnderReview, new HashSet<AssistanceStatus> { AssistanceStatus.Approved, AssistanceStatus.Open } },
+            { AssistanceStatus.Approved, new HashSet<AssistanceStatus> { AssistanceStatus.Open, AssistanceStatus.FullyFunded, AssistanceStatus.Fulfilled, AssistanceStatus.Closed } },
+            { AssistanceStatus.Open, new HashSet<AssistanceStatus> { AssistanceStatus.FullyFunded, AssistanceStatus.Fulfilled, AssistanceStatus.Closed, AssistanceStatus.Approved } },
+            { AssistanceStatus.FullyFunded, new HashSet<AssistanceStatus> { AssistanceStatus.Fulfilled, AssistanceStatus.Closed, AssistanceStatus.Open } },
+            { AssistanceStatus.Fulfilled, new HashSet<AssistanceStatus> { AssistanceStatus.Closed } },
+            { AssistanceStatus.Closed, new HashSet<AssistanceStatus> { AssistanceStatus.Open } }
+        };
+
+        if (!allowedTransitions.ContainsKey(currentStatus))
+            return false;
+
+        return allowedTransitions[currentStatus].Contains(newStatus);
+    }
 }

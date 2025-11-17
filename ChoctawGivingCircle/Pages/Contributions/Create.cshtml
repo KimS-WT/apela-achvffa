@@ -1,0 +1,87 @@
+@page
+@model ChoctawGivingCircle.Pages.Contributions.CreateModel
+@{
+    ViewData["Title"] = "Make a Donation";
+}
+
+<h2>Make a Donation</h2>
+
+<form method="post" class="row g-3">
+    <div class="col-md-6">
+        <label asp-for="Input.Amount" class="form-label">Amount</label>
+        <input asp-for="Input.Amount" class="form-control" />
+        <span asp-validation-for="Input.Amount" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-6">
+        <label asp-for="Input.ContributionType" class="form-label">Type</label>
+        <select asp-for="Input.ContributionType" class="form-select">
+            <option>Money</option>
+            <option>Item</option>
+            <option>Service</option>
+        </select>
+    </div>
+
+    <div class="col-12">
+        <label asp-for="Input.AssistanceRequestId" class="form-label">Donate To (optional)</label>
+        <select asp-for="Input.AssistanceRequestId" class="form-select">
+            <option value="">General Fund</option>
+            @foreach (var r in Model.Requests)
+            {
+                <option value="@r.Id">@r.Title (@r.Priority)</option>
+            }
+        </select>
+    </div>
+
+    <div class="col-md-6">
+        <div class="form-check">
+            <input asp-for="IsAnonymous" class="form-check-input" />
+            <label asp-for="IsAnonymous" class="form-check-label">Donate anonymously</label>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <label asp-for="ContactEmail" class="form-label">Contact Email (for receipt / drop-off)</label>
+        <input asp-for="ContactEmail" class="form-control" />
+    </div>
+
+    <div class="col-12">
+        <label asp-for="Input.Notes" class="form-label">Notes</label>
+        <textarea asp-for="Input.Notes" class="form-control"></textarea>
+    </div>
+
+    <div class="col-md-6">
+        <label asp-for="DropOffLocationId" class="form-label">Drop-off Location (for items)</label>
+        <select asp-for="DropOffLocationId" class="form-select">
+            <option value="">-- choose location --</option>
+            @foreach (var loc in Model.Locations)
+            {
+                <option value="@loc.Id">@loc.Name - @loc.Address</option>
+            }
+        </select>
+    </div>
+
+    <div class="col-md-6">
+        <label asp-for="DropOffDate" class="form-label">Preferred Drop-off Date</label>
+        <input asp-for="DropOffDate" type="datetime-local" class="form-control" />
+    </div>
+
+    <div class="col-12">
+        <button type="submit" class="btn btn-choctaw" id="donateBtn">Donate</button>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        document.getElementById('donateBtn').addEventListener('click', function (e) {
+            const type = document.querySelector('[name="Input.ContributionType"]').value;
+            if (type === 'Money') {
+                const ok = confirm('Confirm donation and proceed to fake payment confirmation?');
+                if (!ok) {
+                    e.preventDefault();
+                }
+            }
+        });
+    </script>
+}

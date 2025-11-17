@@ -13,6 +13,13 @@
         <a class="btn btn-primary" asp-page="/Requests/Create">Share a Request</a>
     </div>
 
+    @if (User.IsInRole("Admin"))
+    {
+        <div class="alert alert-info">
+            <strong>Admin Note:</strong> This page shows only approved and open requests. To review all submitted requests (pending approval), visit <a asp-page="/Admin/Requests/Index" class="alert-link">All Requests</a>.
+        </div>
+    }
+
     @if (Model.Requests.Count == 0)
     {
         <div class="alert alert-info">

@@ -21,10 +21,12 @@ public static class SeedData
         await EnsureRolesAsync(scopedProvider.GetRequiredService<RoleManager<IdentityRole>>());
         var userManager = scopedProvider.GetRequiredService<UserManager<ApplicationUser>>();
         var adminUser = await EnsureAdminAsync(userManager);
+        await EnsureSecondAdminAsync(userManager);
         await SeedTribesAsync(dbContext);
         await SeedCommunityMembersAsync(userManager);
         await SeedSampleRequestsAsync(dbContext, adminUser.Id);
         await SeedSampleContributionsAsync(dbContext, userManager);
+        await SeedLocationsAsync(dbContext);
     }
 
     private static async Task EnsureRolesAsync(RoleManager<IdentityRole> roleManager)
@@ -296,6 +298,101 @@ public static class SeedData
         });
 
         await dbContext.Contributions.AddRangeAsync(contributions);
+        await dbContext.SaveChangesAsync();
+    }
+
+    private static async Task EnsureSecondAdminAsync(UserManager<ApplicationUser> userManager)
+    {
+        const string secondAdminEmail = "admin2@demo.local";
+        const string secondAdminPassword = "Admin!123";
+
+        var secondAdmin = await userManager.FindByEmailAsync(secondAdminEmail);
+        if (secondAdmin != null)
+        {
+            return;
+        }
+
+        secondAdmin = new ApplicationUser
+        {
+            UserName = secondAdminEmail,
+            Email = secondAdminEmail,
+            EmailConfirmed = true,
+            IsTribalMember = true,
+            DisplayName = "Demo Admin 2",
+            Bio = "Co-signer and approvals administrator."
+        };
+
+        var result = await userManager.CreateAsync(secondAdmin, secondAdminPassword);
+        if (!result.Succeeded)
+        {
+            throw new InvalidOperationException($"Failed to create second admin user: {string.Join(", ", result.Errors.Select(e => e.Description))}");
+        }
+
+        await userManager.AddToRoleAsync(secondAdmin, "Admin");
+    }
+
+    private static async Task SeedLocationsAsync(ApplicationDbContext dbContext)
+    {
+        if (await dbContext.Locations.AnyAsync())
+        {
+            return;
+        }
+
+        var locations = new List<Location>
+        {
+            new()
+            {
+                Name = "Durant Community Center",
+                Address = "123 Main St, Durant, OK 74701",
+                Phone = "(580) 555-1111",
+                Hours = "Mon-Fri 9am-5pm, Sat 10am-2pm",
+                Notes = "Main donation hub for Durant area.",
+                IsActive = true,
+                CreatedAt = DateTime.UtcNow
+            },
+            new()
+            {
+                Name = "Oklahoma City Distribution Point",
+                Address = "456 Capitol Ave, Oklahoma City, OK 73102",
+                Phone = "(405) 555-2222",
+                Hours = "Mon-Sat 10am-6pm, Sun 12pm-4pm",
+                Notes = "Central donation and distribution center.",
+                IsActive = true,
+                CreatedAt = DateTime.UtcNow
+            },
+            new()
+            {
+                Name = "Muskogee Regional Hub",
+                Address = "789 Commerce St, Muskogee, OK 74401",
+                Phone = "(918) 555-3333",
+                Hours = "Tue-Thu 8am-6pm, Fri 8am-4pm",
+                Notes = "Eastern Oklahoma donations and pickups.",
+                IsActive = true,
+                CreatedAt = DateTime.UtcNow
+            },
+            new()
+            {
+                Name = "Tulsa Community Resource Center",
+                Address = "321 Riverside Dr, Tulsa, OK 74103",
+                Phone = "(918) 555-4444",
+                Hours = "Mon-Fri 10am-5pm",
+                Notes = "Partner with local organizations.",
+                IsActive = true,
+                CreatedAt = DateTime.UtcNow
+            },
+            new()
+            {
+                Name = "Philadelphia Choctaw Partnership",
+                Address = "555 Indian Nation Blvd, Philadelphia, MS 39350",
+                Phone = "(601) 555-5555",
+                Hours = "Wed & Fri 11am-3pm",
+                Notes = "Mississippi Band coordination point.",
+                IsActive = true,
+                CreatedAt = DateTime.UtcNow
+            }
+        };
+
+        await dbContext.Locations.AddRangeAsync(locations);
         await dbContext.SaveChangesAsync();
     }
 }

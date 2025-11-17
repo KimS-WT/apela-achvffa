@@ -180,6 +180,195 @@ namespace ChoctawGivingCircle.Migrations
                     b.ToTable("Contributions");
                 });
 
+            modelBuilder.Entity("ChoctawGivingCircle.Models.DonationDropOff", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime?>("CompletedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("ContributionId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("IsCompleted")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("LocationId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Notes")
+                        .HasMaxLength(500)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("RescheduleToken")
+                        .HasMaxLength(100)
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("ScheduledDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ContributionId");
+
+                    b.HasIndex("LocationId");
+
+                    b.ToTable("DonationDropOffs");
+                });
+
+            modelBuilder.Entity("ChoctawGivingCircle.Models.EmailLog", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Body")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("EmailType")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ErrorMessage")
+                        .HasMaxLength(500)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("RecipientEmail")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("RelatedAssistanceRequestId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("RelatedContributionId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("RelatedUserId")
+                        .HasMaxLength(150)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Subject")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RelatedAssistanceRequestId");
+
+                    b.HasIndex("RelatedContributionId");
+
+                    b.ToTable("EmailLogs");
+                });
+
+            modelBuilder.Entity("ChoctawGivingCircle.Models.FundAllocationApproval", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime?>("ApprovedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ApprovedByAdminId")
+                        .HasMaxLength(150)
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("AssistanceRequestId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ContributionId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Notes")
+                        .HasMaxLength(500)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("RequestedByAdminId")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApprovedByAdminId");
+
+                    b.HasIndex("AssistanceRequestId");
+
+                    b.HasIndex("ContributionId");
+
+                    b.HasIndex("RequestedByAdminId");
+
+                    b.ToTable("FundAllocationApprovals");
+                });
+
+            modelBuilder.Entity("ChoctawGivingCircle.Models.Location", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasMaxLength(300)
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Hours")
+                        .HasMaxLength(200)
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Notes")
+                        .HasMaxLength(500)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Phone")
+                        .HasMaxLength(20)
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Locations");
+                });
+
             modelBuilder.Entity("ChoctawGivingCircle.Models.Tribe", b =>
                 {
                     b.Property<int>("Id")
@@ -342,6 +531,73 @@ namespace ChoctawGivingCircle.Migrations
                     b.Navigation("DonorUser");
                 });
 
+            modelBuilder.Entity("ChoctawGivingCircle.Models.DonationDropOff", b =>
+                {
+                    b.HasOne("ChoctawGivingCircle.Models.Contribution", "Contribution")
+                        .WithMany()
+                        .HasForeignKey("ContributionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ChoctawGivingCircle.Models.Location", "Location")
+                        .WithMany("DropOffs")
+                        .HasForeignKey("LocationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Contribution");
+
+                    b.Navigation("Location");
+                });
+
+            modelBuilder.Entity("ChoctawGivingCircle.Models.EmailLog", b =>
+                {
+                    b.HasOne("ChoctawGivingCircle.Models.AssistanceRequest", "RelatedAssistanceRequest")
+                        .WithMany()
+                        .HasForeignKey("RelatedAssistanceRequestId");
+
+                    b.HasOne("ChoctawGivingCircle.Models.Contribution", "RelatedContribution")
+                        .WithMany()
+                        .HasForeignKey("RelatedContributionId");
+
+                    b.Navigation("RelatedAssistanceRequest");
+
+                    b.Navigation("RelatedContribution");
+                });
+
+            modelBuilder.Entity("ChoctawGivingCircle.Models.FundAllocationApproval", b =>
+                {
+                    b.HasOne("ChoctawGivingCircle.Data.ApplicationUser", "ApprovedByAdmin")
+                        .WithMany()
+                        .HasForeignKey("ApprovedByAdminId");
+
+                    b.HasOne("ChoctawGivingCircle.Models.AssistanceRequest", "AssistanceRequest")
+                        .WithMany()
+                        .HasForeignKey("AssistanceRequestId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ChoctawGivingCircle.Models.Contribution", "Contribution")
+                        .WithMany()
+                        .HasForeignKey("ContributionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ChoctawGivingCircle.Data.ApplicationUser", "RequestedByAdmin")
+                        .WithMany()
+                        .HasForeignKey("RequestedByAdminId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ApprovedByAdmin");
+
+                    b.Navigation("AssistanceRequest");
+
+                    b.Navigation("Contribution");
+
+                    b.Navigation("RequestedByAdmin");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -391,6 +647,11 @@ namespace ChoctawGivingCircle.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("ChoctawGivingCircle.Models.Location", b =>
+                {
+                    b.Navigation("DropOffs");
                 });
 #pragma warning restore 612, 618
         }
