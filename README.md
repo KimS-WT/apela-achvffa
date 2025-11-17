@@ -8,6 +8,14 @@ A demo ASP.NET Core 9.0 Razor Pages application implementing a small mutual-aid 
 - Admins review requests, allocate general-fund contributions, and perform a co-signature approval flow for sensitive allocations.
 - Fake email delivery is used for demos and writes to an `EmailLogs` table for audit and verification.
 
+## Screenshots
+<p align="center">
+  <img src="assets/screenshots/home.png" alt="Admin Home" width="260">
+  <img src="assets/screenshots/admin-all-donations.png" alt="All Donations" width="260">
+  <img src="assets/screenshots/pending-fund-approvals.png" alt="Pending Fund Approvals" width="260">
+  <img src="assets/screenshots/admin-approved-requests.png" alt="Admin Approved Requests" width="260">
+</p>
+
 ## Project layout
 - `ChoctawGivingCircle/`  main web app and Razor Pages.
 - `ChoctawGivingCircle/Data/`  EF Core `ApplicationDbContext`, `SeedData`, and Identity extensions.
