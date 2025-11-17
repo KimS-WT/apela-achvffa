@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ChoctawGivingCircle")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ea6f0fb9d3641bcf9f74d9dd7e195c97b5720eac")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6c5eb74049652fbc7b745458572276e359a3c0cf")]
 [assembly: System.Reflection.AssemblyProductAttribute("ChoctawGivingCircle")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ChoctawGivingCircle")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

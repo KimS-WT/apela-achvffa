@@ -9,4 +9,10 @@ public interface IContributionService
     Task<Contribution?> GetByIdAsync(int id);
     Task AllocateToRequestAsync(int contributionId, int assistanceRequestId);
     Task<decimal> GetGeneralFundBalanceAsync();
+    Task CreateAsync(Contribution contribution);
+    Task UpdateAsync(Contribution contribution);
+    Task DeleteAsync(int id);
+    Task<List<Contribution>> GetByDonorAsync(string donorUserId);
+    Task<List<Contribution>> GetAnonymousAsync();
+    Task<List<Contribution>> GetByLocationAsync(int locationId);
 }

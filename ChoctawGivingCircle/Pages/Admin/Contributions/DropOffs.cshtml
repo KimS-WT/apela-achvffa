@@ -1,0 +1,54 @@
+@page
+@model ChoctawGivingCircle.Pages.Admin.Contributions.DropOffsModel
+@{
+    ViewData["Title"] = "Manage Drop-Offs";
+}
+
+<h2>Scheduled Drop-Offs</h2>
+
+@if (TempData["StatusMessage"] != null)
+{
+    <div class="alert alert-info">@TempData["StatusMessage"]</div>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Contribution</th>
+            <th>Location</th>
+            <th>Scheduled</th>
+            <th>Notes</th>
+            <th>Status</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var d in Model.DropOffList)
+        {
+            <tr>
+                <td>@d.Id</td>
+                <td>@d.Contribution?.ContributionType - @d.Contribution?.Amount.ToString("C")</td>
+                <td>@d.Location?.Name<br />@d.Location?.Address</td>
+                <td>@d.ScheduledDate.ToLocalTime().ToString("g")</td>
+                <td>@d.Notes</td>
+                <td>@(d.IsCompleted ? "Completed" : "Scheduled")</td>
+                <td>
+                    @if (!d.IsCompleted)
+                    {
+                        <form method="post" asp-page-handler="Complete" class="d-inline">
+                            <input type="hidden" name="id" value="@d.Id" />
+                            <button class="btn btn-sm btn-success">Mark Completed</button>
+                        </form>
+
+                        <form method="post" asp-page-handler="Reschedule" class="d-inline ms-2">
+                            <input type="hidden" name="id" value="@d.Id" />
+                            <input type="datetime-local" name="newDate" class="form-control d-inline-block" style="width:200px" required />
+                            <button class="btn btn-sm btn-secondary ms-1">Reschedule</button>
+                        </form>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -27,3 +27,5 @@ packages/
 # Other
 *.swp
 *.DS_Store
+.github/copilot-instructions.md
+DEMO_GUIDE.md

@@ -36,6 +36,42 @@
                         @(Model.Item.NeededByDate?.ToString("D") ?? "Flexible")
                     </dd>
                 </dl>
+                <div class="mt-4">
+                    <h5>Funding Progress</h5>
+                    <div class="progress mb-2" style="height:24px;">
+                        <div class="progress-bar" role="progressbar" style="width:@Model.ProgressPercent%" aria-valuenow="@Model.ProgressPercent" aria-valuemin="0" aria-valuemax="100">
+                            @Model.ProgressPercent% (@Model.FundedAmount.ToString("C"))
+                        </div>
+                    </div>
+                    <a class="btn btn-choctaw me-2" asp-page="/Contributions/Create" asp-route-requestId="@Model.Item.Id">Quick Donate</a>
+                    <a class="btn btn-outline-secondary" asp-page="/Contributions/Create">Donate to General Fund</a>
+                </div>
+
+                <div class="mt-4">
+                    <h5>Contributions</h5>
+                    @if (Model.Contributions == null || !Model.Contributions.Any())
+                    {
+                        <div class="text-muted">No contributions yet — be the first to help.</div>
+                    }
+                    else
+                    {
+                        <ul class="list-group">
+                            @foreach (var c in Model.Contributions)
+                            {
+                                <li class="list-group-item d-flex justify-content-between align-items-start">
+                                    <div>
+                                        <div class="fw-bold">@c.ContributionType - @c.Amount.ToString("C")</div>
+                                        <div class="text-muted small">@c.Notes</div>
+                                        <div class="text-muted small">@c.CreatedAt.ToLocalTime().ToString("g")</div>
+                                    </div>
+                                    <div class="text-end">
+                                        <div class="small">@((c.DonorUser?.DisplayName) ?? "Anonymous")</div>
+                                    </div>
+                                </li>
+                            }
+                        </ul>
+                    }
+                </div>
             </div>
         </div>
     }

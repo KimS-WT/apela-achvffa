@@ -1,0 +1,66 @@
+@page
+@model ChoctawGivingCircle.Pages.Admin.Contributions.ApprovalsModel
+@{
+    ViewData["Title"] = "Pending Allocations";
+}
+
+<h2>Pending Fund Allocations</h2>
+
+@if (TempData["StatusMessage"] != null)
+{
+    <div class="alert alert-info">@TempData["StatusMessage"]</div>
+}
+
+@if (!Model.Pending.Any())
+{
+    <div class="text-muted">No pending allocations.</div>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Contribution</th>
+                <th>Amount</th>
+                <th>Request</th>
+                <th>Requested By</th>
+                <th>When</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var a in Model.Pending)
+            {
+                <tr>
+                    <td>@a.Id</td>
+                    <td>
+                        @if (a.Contribution != null)
+                        {
+                            <a asp-area="" asp-page="/Admin/Contributions/Edit" asp-route-id="@a.Contribution.Id">@a.Contribution.ContributionType</a>
+                        }
+                    </td>
+                    <td>@a.Contribution?.Amount.ToString("C")</td>
+                    <td>
+                        @if (a.AssistanceRequest != null)
+                        {
+                            <a asp-area="" asp-page="/Admin/Requests/Edit" asp-route-id="@a.AssistanceRequest.Id">@a.AssistanceRequest.Title</a>
+                        }
+                    </td>
+                    <td>@(a.RequestedByAdmin?.DisplayName ?? a.RequestedByAdmin?.UserName ?? a.RequestedByAdminId)</td>
+                    <td>@a.CreatedAt.ToLocalTime().ToString("g")</td>
+                    <td>
+                        <form method="post" asp-page-handler="Approve" class="d-inline">
+                            <input type="hidden" name="id" value="@a.Id" />
+                            <button class="btn btn-sm btn-success">Approve</button>
+                        </form>
+                        <form method="post" asp-page-handler="Deny" class="d-inline ms-2">
+                            <input type="hidden" name="id" value="@a.Id" />
+                            <button class="btn btn-sm btn-danger">Deny</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

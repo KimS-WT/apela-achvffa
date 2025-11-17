@@ -34,6 +34,9 @@
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-page="/Requests/Create">Share a Request</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-page="/Contributions/Create">Donate</a>
+                        </li>
                         @if (User.Identity?.IsAuthenticated ?? false)
                         {
                             <li class="nav-item">
@@ -46,7 +49,16 @@
                                 <a class="nav-link" asp-area="" asp-page="/Admin/Users/Index">Manage Users</a>
                             </li>
                             <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-page="/Admin/Requests/Index">All Requests</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" asp-area="" asp-page="/Admin/Contributions/Index">Manage Contributions</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-page="/Admin/Contributions/Approvals">Pending Approvals</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-page="/Admin/Contributions/DropOffs">Drop-Offs</a>
                             </li>
                         }
                         <li class="nav-item">

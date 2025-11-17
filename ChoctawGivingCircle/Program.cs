@@ -19,6 +19,7 @@ builder.Services
 
 builder.Services.AddScoped<IAssistanceRequestService, AssistanceRequestService>();
 builder.Services.AddScoped<IContributionService, ContributionService>();
+builder.Services.AddScoped<IEmailService, FakeEmailService>();
 
 // Add services to the container.
 builder.Services.AddRazorPages();
